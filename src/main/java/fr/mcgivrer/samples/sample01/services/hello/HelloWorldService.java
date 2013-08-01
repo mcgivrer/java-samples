@@ -1,5 +1,8 @@
 /**
- * 
+ * JavaEE platform Samples : Sample01
+ * @copyright 2013
+ * @author Frédéric Delorme<frederic.delorme@gmail.com>
+ * @author Guillaume Scheibel<guillaume.scheibel@gmail.com>
  */
 package fr.mcgivrer.samples.sample01.services.hello;
 
@@ -35,10 +38,10 @@ public class HelloWorldService {
 	@Path("/hello/{username}")
 	@GET
 	public Response hello(@PathParam("username") String username) {
-				
-		return Response.ok("user " + username +" !").build();
+
+		return Response.ok("user " + username + " !").build();
 	}
-	
+
 	/**
 	 * retrieve name of the user and send and Hello Message.
 	 * 
@@ -46,8 +49,9 @@ public class HelloWorldService {
 	 */
 	@Path("/hello/{username}/{age}/{role}")
 	@GET
-	public Response hello(@PathParam("username") String username, @PathParam("age")int age, @PathParam("role")String role) {
-				
-		return Response.ok("user " + username + ":"+age+":"+role).build();
+	public Response hello(@PathParam("username") String username,
+			@PathParam("age") int age, @PathParam("role") String role) {
+
+		return Response.ok("user " + username + ":" + age + ":" + role).build();
 	}
 }

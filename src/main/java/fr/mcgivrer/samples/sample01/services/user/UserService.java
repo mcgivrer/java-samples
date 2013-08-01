@@ -1,10 +1,14 @@
 /**
- * 
+ * JavaEE platform Samples : Sample01
+ * @copyright 2013
+ * @author Frédéric Delorme<frederic.delorme@gmail.com>
+ * @author Guillaume Scheibel<guillaume.scheibel@gmail.com>
  */
 package fr.mcgivrer.samples.sample01.services.user;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -30,10 +34,10 @@ import fr.mcgivrer.samples.sample01.model.User;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserService {
 
+	@Inject
 	private Users users;
 
 	public UserService() {
-		users = new Users();
 	}
 
 	/**
@@ -82,7 +86,7 @@ public class UserService {
 	 */
 	@Path("/user/{uid}")
 	@GET
-	public Response getUserById(@PathParam("uid") String uid) {
+	public Response getUserById(@PathParam("uid") int uid) {
 		User user = users.findById(uid);
 		if (user != null) {
 			try {

@@ -1,12 +1,18 @@
 /**
- * 
+ * JavaEE platform Samples : Sample01
+ * @copyright 2013
+ * @author Frédéric Delorme<frederic.delorme@gmail.com>
+ * @author Guillaume Scheibel<guillaume.scheibel@gmail.com>
  */
 package fr.mcgivrer.samples.sample01.data;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import fr.mcgivrer.samples.sample01.model.User;
 
@@ -16,26 +22,18 @@ import fr.mcgivrer.samples.sample01.model.User;
  */
 public class Users {
 
+	@PersistenceContext(unitName = "samples")
+	EntityManager em;
+
 	private Map<String, User> users = new HashMap<>();
 
 	/**
 	 * Initialize data.
 	 */
 	public Users() {
-		users.put("1", new User("fdelorme", "Frédéric", "Delorme", "passwd",
-				"frederic.delorme@mail.com"));
-		users.put("2", new User("gscheibel", "Guillaume", "Scheibel", "passwd",
-				"guillaume.scheibel@mail.com"));
-		users.put("3", new User("akubler", "Arnaud", "Kubler", "passwd",
-				"arnaud.kubler@mail.com"));
-		users.put("4", new User("achristmann", "Alain", "Christmann", "passwd",
-				"alain.christmann@mail.com"));
-		users.put("5", new User("jlalisse", "Jérôme", "Lalisse", "passwd",
-				"jerome.lalisse@mail.com"));
-		users.put("6", new User("ogenser", "Olivier", "Genser", "passwd",
-				"olivier.genser@mail.com"));
-		users.put("7", new User("rfrigui", "Rassil", "Frigui", "passwd",
-				"rassil.frigui@mail.com"));
+
+		
+
 	}
 
 	/**
@@ -44,8 +42,8 @@ public class Users {
 	 * @param uid
 	 * @return
 	 */
-	public User findById(String uid) {
-		return users.get(uid);
+	public User findById(int uid) {
+		return em.find(User.class, uid);
 	}
 
 	/**
@@ -55,19 +53,35 @@ public class Users {
 	 * @return
 	 */
 	public User findByUsername(String username) {
-		for (User user : users.values()) {
 
-			if (user.getUsername().equals(username)) {
-				return user;
-			}
-		}
-		return null;
+		Query q = em.createNamedQuery("findByUsername");
+		q.setParameter("username", username);
+		return (User) q.getResultList().get(1);
+
 	}
 
+	/**
+	 * retrieve user on its <code>firstname</code>.
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public User findByFirstname(String firstname) {
+
+		Query q = em.createNamedQuery("findByFirstname");
+		q.setParameter("firstname", firstname);
+		return (User) q.getResultList().get(1);
+
+	}
+
+	/**
+	 * Retrieve all users from database.
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
 	public List<User> findAll() {
-		List<User> list = new ArrayList<>();
-		list.addAll(users.values());
-		return list;
+		return em.createNamedQuery("findAll").getResultList();
 	}
 
 }

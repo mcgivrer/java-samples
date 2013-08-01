@@ -1,16 +1,19 @@
 /**
- * 
+ * JavaEE platform Samples : Sample01
+ * @copyright 2013
+ * @author Frédéric Delorme<frederic.delorme@gmail.com>
+ * @author Guillaume Scheibel<guillaume.scheibel@gmail.com>
  */
 package fr.mcgivrer.samples.sample01.test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
+import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Before;
 import org.junit.Test;
 
 import fr.mcgivrer.samples.sample01.model.User;
@@ -24,12 +27,8 @@ import fr.mcgivrer.samples.sample01.services.user.UserService;
  */
 public class UserServiceTest {
 
+	@Inject
 	private UserService userService;
-
-	@Before
-	public void setUp() {
-		userService = new UserService();
-	}
 
 	@Test
 	public void testGetUserOK() {
@@ -58,7 +57,7 @@ public class UserServiceTest {
 		/**
 		 * get an existing user
 		 */
-		Response userResp = userService.getUserById("1");
+		Response userResp = userService.getUserById(1);
 
 		assertThat(userResp.getStatus()).isEqualTo(
 				Response.Status.OK.getStatusCode());
@@ -72,13 +71,13 @@ public class UserServiceTest {
 		/**
 		 * get an error 404.
 		 */
-		assertThat(userService.getUserById("12").getStatus()).isEqualTo(
+		assertThat(userService.getUserById(12).getStatus()).isEqualTo(
 				Response.Status.NOT_FOUND.getStatusCode());
 	}
 
 	@Test
 	public void testgetAllUsers() throws JSONException {
-		
+
 		/*
 		 * retrieve all users
 		 */
