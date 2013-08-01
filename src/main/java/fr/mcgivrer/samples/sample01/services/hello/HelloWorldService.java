@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.mcgivrer.samples.sample01.services;
+package fr.mcgivrer.samples.sample01.services.hello;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

@@ -40,6 +40,12 @@
 			<version>3.0.2.Final</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20090211</version>
+		</dependency>
 	</dependencies>
 	
 	<dependencyManagement>

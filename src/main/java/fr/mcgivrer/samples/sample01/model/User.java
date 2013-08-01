@@ -9,7 +9,7 @@ package fr.mcgivrer.samples.sample01.model;
  */
 public class User {
 
-	private String username;
+	public String username;
 
 	private String firstName;
 

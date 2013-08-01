@@ -7,6 +7,9 @@ import static org.fest.assertions.Assertions.assertThat;
 
 import javax.ws.rs.core.Response;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,6 +51,46 @@ public class UserServiceTest {
 		 */
 		assertThat(userService.getUser("toto").getStatus()).isEqualTo(
 				Response.Status.NOT_FOUND.getStatusCode());
+	}
+
+	@Test
+	public void testGetJsonUserOK() throws JSONException {
+		/**
+		 * get an existing user
+		 */
+		Response userResp = userService.getUserById("1");
+
+		assertThat(userResp.getStatus()).isEqualTo(
+				Response.Status.OK.getStatusCode());
+
+		JSONObject json = new JSONObject(userResp.getEntity().toString());
+		assertThat(json.get("firstname")).isEqualTo("Frédéric");
+	}
+
+	@Test
+	public void testGetJsonUserKO() {
+		/**
+		 * get an error 404.
+		 */
+		assertThat(userService.getUserById("12").getStatus()).isEqualTo(
+				Response.Status.NOT_FOUND.getStatusCode());
+	}
+
+	@Test
+	public void testgetAllUsers() throws JSONException {
+		
+		/*
+		 * retrieve all users
+		 */
+		Response respList = userService.findAllUsers();
+
+		assertThat(respList.getStatus()).isEqualTo(
+				Response.Status.OK.getStatusCode());
+
+		JSONArray json = new JSONArray(respList.getEntity().toString());
+
+		assertThat(json.length()).isEqualTo(7);
+
 	}
 
 	@Test

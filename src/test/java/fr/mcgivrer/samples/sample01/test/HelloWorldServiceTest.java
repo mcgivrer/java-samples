@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import org.junit.Before;
 import org.junit.Test;
 
-import fr.mcgivrer.samples.sample01.services.HelloWorldService;
+import fr.mcgivrer.samples.sample01.services.hello.HelloWorldService;
 
 /**
  * @author FDELORME
@@ -28,7 +28,7 @@ public class HelloWorldServiceTest {
 	}
 	
 	/**
-	 * Test method for {@link fr.mcgivrer.samples.sample01.services.HelloWorldService#hello()}.
+	 * Test method for {@link fr.mcgivrer.samples.sample01.services.hello.HelloWorldService#hello()}.
 	 */
 	@Test
 	public void testHello() {
@@ -36,7 +36,7 @@ public class HelloWorldServiceTest {
 	}
 
 	/**
-	 * Test method for {@link fr.mcgivrer.samples.sample01.services.HelloWorldService#hello(java.lang.String)}.
+	 * Test method for {@link fr.mcgivrer.samples.sample01.services.hello.HelloWorldService#hello(java.lang.String)}.
 	 */
 	@Test
 	public void testHelloString() {
